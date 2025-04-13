@@ -33,9 +33,13 @@ Tu misión es **adivinarlo en un número limitado de intentos**. Con cada intent
 📁 Estructura del proyecto
 
 adivina-el-numero/
+
 ├── index.html         # Página principal del juego
+
 ├── style.css          # Estilos visuales
+
 ├── script.js          # Lógica del juego
+
 └── README.md          # Este archivo 📝
 
 ---
@@ -52,12 +56,16 @@ adivina-el-numero/
 💡 Posibles mejoras para futuras veriones
 
 🎵 Añadir efectos de sonido
+
 📱 Versión responsive móvil
+
 🌐 Publicarlo con GitHub Pages
+
 🏆 Tabla de líderes global (con backend)
 
 ---
 
 🖥️ Demo en vivo
+
 📌 (Pendiente de publicar)
 
