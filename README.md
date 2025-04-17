@@ -16,17 +16,18 @@ Tu misión es **adivinarlo en un número limitado de intentos**. Con cada intent
 ## ✨ Características ✨
 
 - 🔢 El usuario define el **rango de números** y la **cantidad de intentos disponibles**
-- 👤 Se ingresan **3 iniciales** para registrar el puntaje
+- 👤 Se ingresan **3 iniciales** para registrar la puntuación
 - 🎯 El número aleatorio se mantiene hasta que se acierte o se terminen los intentos
 - 💬 Mensajes visuales según el resultado:
   - 🟢 Verde: ¡Correcto!
   - 🔵 Azul: El número secreto es mayor
   - 🟠 Naranja: El número secreto es menor
   - 🔴 Rojo: Entrada inválida o fuera de rango
-- 📊 Puntajes ordenados por eficiencia (% de intentos usados)
-- 💾 Puntajes guardados en **localStorage**
-- 📥 Opción de **descargar los puntajes como XML**
-- 🧼 Botón para **borrar todos los puntajes**
+- 📊 Puntuaciones ordenados por eficiencia (% de intentos usados)
+- 💾 Puntuaciones guardados en **localStorage**
+- 📥 Opción de **descargar las puntuaciones como XML**
+- 📤 Opción de **importar archivo con las puntuaciones en formato XML**
+- 🧼 Botón para **borrar todas las puntuaciones registradas**
 
 ---
 
@@ -44,7 +45,7 @@ adivina-el-numero/
 
 ---
 
-📦 Tecnologías usadas
+📦 Tecnologías usadas 📦
 - HTML5
 - CSS3
 - JavaScript (vanilla)
@@ -53,11 +54,11 @@ adivina-el-numero/
 
 ---
 
-💡 Posibles mejoras para futuras veriones
+💡 Posibles mejoras para futuras veriones 💡
 
 🎵 Añadir efectos de sonido
 
-📱 Versión responsive móvil
+📱 Versión móvil (Ahora mismo solo es responsive)
 
 🌐 Publicarlo con GitHub Pages
 
