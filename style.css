@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  input, button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  #mensaje {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  #tablaPuntuaciones {
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  .mensaje {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .mensaje-correcto {
+    color: green;
+  }
+  
+  .mensaje-pista-alto {
+    color: orange;
+  }
+  
+  .mensaje-pista-bajo {
+    color: blue;
+  }
+  
+  .mensaje-error {
+    color: red;
+  }  
