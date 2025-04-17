@@ -175,8 +175,8 @@ function descargarPuntuacionesXML() {
   const blob = new Blob([xmlContent], { type: "application/xml" });
   const url  = URL.createObjectURL(blob);
   // Crear un enlace de descarga temporal
-  const a    = document.createElement("a");
-  a.href     = url;
+  const a = document.createElement("a");
+  a.href = url;
   a.download = "puntuaciones.xml";
   document.body.appendChild(a);
   a.click();
@@ -203,12 +203,12 @@ function importarPuntuaciones() {
     for (let i = 0; i < entradas.length; i++) {
       const iniciales = entradas[i].getElementsByTagName("iniciales")[0]?.textContent;
       const intentosUsados = parseInt(entradas[i].getElementsByTagName("intentosUsados")[0]?.textContent);
-      const intentosTotales = parseInt(entradas[i].getElementsByTagName("intentosTotales")[0]?.textContent
+      const totalIntentos = parseInt(entradas[i].getElementsByTagName("totalIntentos")[0]?.textContent
       );
 
-      if (!iniciales || isNaN(intentosUsados) || isNaN(intentosTotales)) continue;
+      if (!iniciales || isNaN(intentosUsados) || isNaN(totalIntentos)) continue;
 
-      puntuacionesImportadas.push({ iniciales, intentosUsados, intentosTotales, eficiencia: ((intentosUsados / intentosTotales) * 100).toFixed(2)});
+      puntuacionesImportadas.push({ iniciales, intentosUsados, totalIntentos, eficiencia: ((intentosUsados / totalIntentos) * 100).toFixed(2)});
     }
 
     if (puntuacionesImportadas.length === 0) {
