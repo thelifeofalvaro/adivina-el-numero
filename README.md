@@ -68,5 +68,5 @@ adivina-el-numero/
 
 🖥️ Demo en vivo
 
-📌 (Pendiente de publicar)
+📌 [Enlace a GitHub Pages](https://thelifeofalvaro.github.io/adivina-el-numero/)
 
