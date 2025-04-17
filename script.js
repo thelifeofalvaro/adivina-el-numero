@@ -8,7 +8,7 @@ let puntuaciones = [];
 // Al cargar la página, se recuperan las puntuaciones guardadas
 window.onload = function () {
   cargarPuntuaciones();
-  actualizarTableroPuntuaciones();
+  actualizarTablaPuntuaciones();
 };
 
 function iniciarJuego() {
@@ -16,35 +16,22 @@ function iniciarJuego() {
   maxValor = parseInt(document.getElementById("max").value);
   maxIntentos = parseInt(document.getElementById("intentos").value);
   intentosRestantes = maxIntentos;
-  const iniciales = document
-    .getElementById("iniciales")
-    .value.trim()
-    .toUpperCase();
+  const iniciales = document.getElementById("iniciales").value.trim().toUpperCase();
 
   // Validación de datos: rango numérico, número de intentos y 3 letras para las iniciales
   if (
-    isNaN(minValor) ||
-    isNaN(maxValor) ||
-    isNaN(maxIntentos) ||
-    minValor >= maxValor ||
-    maxIntentos <= 0 ||
-    !/^[A-Z]{3}$/.test(iniciales)
+    isNaN(minValor) || isNaN(maxValor) || isNaN(maxIntentos) || minValor >= maxValor || maxIntentos <= 0 || !/^[A-Z]{3}$/.test(iniciales)
   ) {
-    alert(
-      "Por favor, introduce valores válidos y asegúrate de que las iniciales sean 3 letras."
-    );
+    alert("Por favor, introduce valores válidos y asegúrate de que las iniciales sean 3 letras.");
     return;
   }
 
-  numeroSecreto =
-    Math.floor(Math.random() * (maxValor - minValor + 1)) + minValor;
+  numeroSecreto = Math.floor(Math.random() * (maxValor - minValor + 1)) + minValor;
   console.log("Número secreto: ", numeroSecreto);
 
   document.getElementById("setup").style.display = "none";
   document.getElementById("juego").style.display = "block";
-  document.getElementById(
-    "intentosRestantes"
-  ).innerText = `Intentos restantes: ${intentosRestantes}`;
+  document.getElementById("intentosRestantes").innerText = `Intentos restantes: ${intentosRestantes}`;
 }
 
 function verificarIntento() {
@@ -129,7 +116,7 @@ function guardarPuntuacion(intentosUsados, totalIntentos) {
   // Ordenamos las puntuaciones por eficiencia (menor porcentaje es mejor)
   puntuaciones.sort((a, b) => a.eficiencia - b.eficiencia);
   localStorage.setItem("puntuaciones", JSON.stringify(puntuaciones));
-  actualizarTableroPuntuaciones();
+  actualizarTablaPuntuaciones();
 }
 
 function cargarPuntuaciones() {
@@ -139,7 +126,7 @@ function cargarPuntuaciones() {
   }
 }
 
-function actualizarTableroPuntuaciones() {
+function actualizarTablaPuntuaciones() {
   const tablaPuntuaciones = document.getElementById("tablaPuntuaciones");
 
   if (puntuaciones.length === 0) {
@@ -160,38 +147,39 @@ function borrarPuntuaciones() {
   if (confirm("¿Seguro que quieres borrar todas las puntuaciones?")) {
     localStorage.removeItem("puntuaciones");
     puntuaciones = [];
-    actualizarTableroPuntuaciones();
+    actualizarTablaPuntuaciones();
   }
 }
 
-function descargarXML() {
+function descargarPuntuacionesXML() {
   if (puntuaciones.length === 0) {
     alert("No hay puntuaciones para exportar.");
     return;
   }
 
   // Generamos el contenido del XML
+
   let xmlContent = '<?xml version="1.0" encoding="UTF-8"?>\n<puntuaciones>\n';
-  puntuaciones.forEach((p) => {
-    xmlContent += "  <puntuacion>\n";
+  puntuaciones.forEach(p => {
+    xmlContent += '  <puntuacion>\n';
     xmlContent += `    <iniciales>${p.iniciales}</iniciales>\n`;
     xmlContent += `    <intentosUsados>${p.intentosUsados}</intentosUsados>\n`;
     xmlContent += `    <totalIntentos>${p.totalIntentos}</totalIntentos>\n`;
     xmlContent += `    <eficiencia>${p.eficiencia}</eficiencia>\n`;
-    xmlContent += "  </puntuacion>\n";
+    xmlContent += '  </puntuacion>\n';
   });
-  xmlContent += "</puntuaciones>";
+  xmlContent += '</puntuaciones>';
 
   // Crear un blob con el contenido XML
-  const blob = new Blob([xmlContent], { type: "application/xml" });
-  const url = URL.createObjectURL(blob);
 
+  const blob = new Blob([xmlContent], { type: "application/xml" });
+  const url  = URL.createObjectURL(blob);
   // Crear un enlace de descarga temporal
-  a.href = url;
+  const a    = document.createElement("a");
+  a.href     = url;
   a.download = "puntuaciones.xml";
   document.body.appendChild(a);
   a.click();
-
   // Limpiar
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
@@ -210,21 +198,17 @@ function importarPuntuaciones() {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(e.target.result, "application/xml");
     const entradas = xmlDoc.getElementsByTagName("puntuacion");
-    let importadas = [];
+    let puntuacionesImportadas = [];
 
     for (let i = 0; i < entradas.length; i++) {
-      const iniciales =
-        entradas[i].getElementsByTagName("Iniciales")[0]?.textContent;
-      const usados = parseInt(
-        entradas[i].getElementsByTagName("Usados")[0]?.textContent
-      );
-      const totales = parseInt(
-        entradas[i].getElementsByTagName("Totales")[0]?.textContent
+      const iniciales = entradas[i].getElementsByTagName("iniciales")[0]?.textContent;
+      const intentosUsados = parseInt(entradas[i].getElementsByTagName("intentosUsados")[0]?.textContent);
+      const intentosTotales = parseInt(entradas[i].getElementsByTagName("intentosTotales")[0]?.textContent
       );
 
-      if (!iniciales || isNaN(usados) || isNaN(totales)) continue;
+      if (!iniciales || isNaN(intentosUsados) || isNaN(intentosTotales)) continue;
 
-      puntuacionesImportadas.push({ iniciales, usados, totales });
+      puntuacionesImportadas.push({ iniciales, intentosUsados, intentosTotales, eficiencia: ((intentosUsados / intentosTotales) * 100).toFixed(2)});
     }
 
     if (puntuacionesImportadas.length === 0) {
@@ -232,17 +216,12 @@ function importarPuntuaciones() {
       return;
     }
 
-    const puntuacionesExistentes =
-      JSON.parse(localStorage.getItem("puntuaciones")) || [];
-    const puntuacionesCombinadas = puntuacionesExistentes.concat(
-      puntuacionesImportadas
-    );
+    const puntuacionesExistentes = JSON.parse(localStorage.getItem("puntuaciones")) || [];
+    const puntuacionesCombinadas = puntuacionesExistentes.concat(puntuacionesImportadas);
+    // Ordenar por eficiencia (menor porcentaje es mejor)
 
-    localStorage.setItem(
-      "puntuaciones",
-      JSON.stringify(puntuacionesCombinadas)
-    );
-    displayScores();
+    localStorage.setItem("puntuaciones", JSON.stringify(puntuacionesCombinadas));
+    actualizarTablaPuntuaciones();
 
     alert("✅ Puntuaciones importadas correctamente ✅");
     fileInput.value = ""; // Limpiar el input
