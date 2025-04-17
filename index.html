@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adivina el Número</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>🔢 Juego: Adivina el Número 🔢</h2>
+    
+    <!-- Configuración del juego -->
+    <div id="setup">
+      <input type="number" id="min" placeholder="Valor mínimo">
+      <input type="number" id="max" placeholder="Valor máximo">
+      <input type="number" id="intentos" placeholder="Número de intentos:">
+      <input type="text" id="iniciales" placeholder="Tus iniciales (3 letras)" maxlength="3">
+      <button onclick="iniciarJuego()">Iniciar Juego</button>
+    </div>
+
+    <!-- Sección del juego -->
+    <div id="juego" style="display: none;">
+      <p>Introduce tu número:</p>
+      <input type="number" id="entradaUsuario">
+      <button onclick="verificarIntento()">Adivinar</button>
+      <p id="intentosRestantes"></p>
+    </div>
+
+    <p id="mensaje" class="mensaje"></p>
+    <button id="botonReinicio" onclick="reiniciarJuego()" style="display: none;">Reiniciar Juego</button>
+
+    <hr>
+
+    <!-- Puntuaciones -->
+    <h3>Puntuaciones (% de eficiecncia) </h3>
+    <div id="tablaPuntuaciones">
+      <p>No hay puntuaciones todavía.</p>
+    </div>
+    <button onclick="borrarPuntuaciones()">Borrar Puntuaciones</button>
+    <button onclick="descargarPuntuacionesXML()">Descargar Puntuaciones en XML</button>
+  </div>
+
+  <h3>📤 Importar Puntuaciones</h3>
+    <input type="file" accept=".xml" id="fileInput">
+    <button onclick="importarPuntuaciones()">Importar</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
