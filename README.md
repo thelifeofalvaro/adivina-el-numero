@@ -60,7 +60,7 @@ adivina-el-numero/
 
 📱 Versión móvil (Ahora mismo solo es responsive)
 
-🌐 Publicarlo con GitHub Pages
+~~🌐 Publicarlo con GitHub Pages~~
 
 🏆 Tabla de líderes global (con backend)
 
